@@ -1,0 +1,27 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: ${name}
+servers: 1
+agents: ${agents}
+image: ${image}
+kubeAPI:
+  hostIP: "0.0.0.0"
+  hostPort: "${api_port}"
+ports:
+  - port: ${http_port}:80
+    nodeFilters: [loadbalancer]
+  - port: ${https_port}:443
+    nodeFilters: [loadbalancer]
+  - port: ${grafana_port}:30300
+    nodeFilters: [server:0]
+options:
+  k3s:
+    extraArgs:
+      - arg: --disable=traefik
+        nodeFilters: [server:*]
+      - arg: --tls-san=${host_ip}
+        nodeFilters: [server:*]
+  kubeconfig:
+    updateDefaultKubeconfig: false
+    switchCurrentContext: false

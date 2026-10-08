@@ -1,0 +1,14 @@
+# Credentials — never commit
+secrets/*
+!secrets/README.md
+
+# Generated
+kubeconfig
+kubeconfig-forge
+bnk-forge/
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+.terraform.lock.hcl

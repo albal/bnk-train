@@ -1,0 +1,9 @@
+# Copy to terraform.tfvars and adjust.
+
+# Turn on once ../secrets/far-credentials.json and ../secrets/bnk-license.jwt exist
+enable_bnk = false
+
+# bnk_manifest_version = "2.2.1-3.2226.0-0.0.511"
+# license_mode         = "connected"
+# enable_forge         = true
+# forge_ref            = "main"

@@ -1,0 +1,27 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: bnk-lab
+servers: 1
+agents: 2
+image: rancher/k3s:v1.34.12-k3s1
+kubeAPI:
+  hostIP: "0.0.0.0"
+  hostPort: "6550"
+ports:
+  - port: 9080:80
+    nodeFilters: [loadbalancer]
+  - port: 9443:443
+    nodeFilters: [loadbalancer]
+  - port: 3300:30300
+    nodeFilters: [server:0]
+options:
+  k3s:
+    extraArgs:
+      - arg: --disable=traefik
+        nodeFilters: [server:*]
+      - arg: --tls-san=192.168.21.114
+        nodeFilters: [server:*]
+  kubeconfig:
+    updateDefaultKubeconfig: false
+    switchCurrentContext: false
